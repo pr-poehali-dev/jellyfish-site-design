@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import JellyfishScene from '@/components/JellyfishScene';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -186,6 +187,25 @@ const Index = () => {
           <p className="text-center text-muted-foreground mb-16 text-lg">
             Разнообразие форм и цветов подводного мира
           </p>
+
+          <div className="mb-16">
+            <Card className="p-8 bg-card/50 backdrop-blur-sm border-primary/20">
+              <h3 className="text-3xl font-bold text-center mb-4 glow">Интерактивная 3D модель</h3>
+              <p className="text-center text-muted-foreground mb-6">
+                Используйте мышь для вращения • Колесико для приближения
+              </p>
+              <Suspense fallback={
+                <div className="w-full h-[600px] rounded-2xl bg-gradient-to-b from-ocean-deep to-[#0f1f3d] flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-6xl mb-4 animate-float">🪼</div>
+                    <p className="text-muted-foreground">Загрузка 3D модели...</p>
+                  </div>
+                </div>
+              }>
+                <JellyfishScene />
+              </Suspense>
+            </Card>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {gallery.map((item, index) => (
